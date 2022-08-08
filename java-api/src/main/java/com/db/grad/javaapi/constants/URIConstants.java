@@ -12,4 +12,13 @@ public class URIConstants {
     public static final String GET_TRADE_BY_ID = "/trades/{tradeId}";
     public static final String ADD_TRADE = "/trades";
     public static final String UPDATE_TRADE = "/trades/{tradeId}";
+    
+    //Security URIs
+    public static final String GET_ALL_SECURITY = "/security";
+    public static final String GET_SECURITY_BY_ID = "/security/{securityId}";
+    public static final String ADD_SECURITY = "/security";
+    public static final String UPDATE_SECURITY = "/security/{securityId}";
+    public static final String DELETE_SECURITY = "/security/{securityId}";
+    public static final String GET_TRADES_BY_SECURITYID = "security/{securityId}/trades";
+    public static final String GET_SECURITY_BY_DATERANGE = "/security/daterange/{date1}/{date2}";
 }
