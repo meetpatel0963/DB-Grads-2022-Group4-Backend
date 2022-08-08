@@ -27,7 +27,7 @@ public class BookController {
     private BookService bookService;
 
     @GetMapping(URIConstants.GET_BOOKS_BY_USER_ID)
-    public ResponseEntity<?> getBooksByUserId(@PathVariable(value = "userId") Long userId) throws ResourceNotFoundException {
+    public ResponseEntity<?> getBooksByUserId(@PathVariable(value = "userId") Long userId) {
         try {
             log.info("Fetch Books Request For User ID: {}", userId);
             List<Book> books = bookService.getBooksByUserId(userId);
@@ -41,7 +41,7 @@ public class BookController {
     }
 
     @GetMapping(URIConstants.GET_TRADES_BY_BOOK_ID)
-    public ResponseEntity<?> getTradesByBookId(@PathVariable(value = "bookId") Long bookId) throws ResourceNotFoundException {
+    public ResponseEntity<?> getTradesByBookId(@PathVariable(value = "bookId") Long bookId) {
         try {
             log.info("Fetch Trades Request For Book ID: {}", bookId);
             List<Trade> trades = bookService.getTradesByBookId(bookId);
