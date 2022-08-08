@@ -4,6 +4,7 @@ import com.db.grad.javaapi.constants.MessageConstants;
 import com.db.grad.javaapi.constants.URIConstants;
 import com.db.grad.javaapi.exception.ResourceNotFoundException;
 import com.db.grad.javaapi.model.ErrorResponse;
+import com.db.grad.javaapi.model.security.Security;
 import com.db.grad.javaapi.model.trade.Trade;
 import com.db.grad.javaapi.service.TradeService;
 import lombok.extern.slf4j.Slf4j;
@@ -39,6 +40,21 @@ public class TradeController {
         }
         catch (ResourceNotFoundException E) {
             log.error(MessageConstants.FETCH_TRADE_BY_ID_FAILED + E.getMessage());
+            ErrorResponse errorResponse = ErrorResponse.builder().errorCode(HttpStatus.NOT_FOUND.value()).message(E.getMessage()).build();
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(errorResponse);
+        }
+    }
+
+    @GetMapping(URIConstants.GET_SECURITY_FOR_TRADE)
+    @PreAuthorize(MessageConstants.USER_ADMIN)
+    public ResponseEntity<?> getSecurityForTrade(@PathVariable(value = "tradeId") Long tradeId) {
+        try {
+            log.info("Fetch Security For Trade ID: {}", tradeId);
+            Security security = tradeService.getSecurityForTrade(tradeId);
+            return ResponseEntity.ok().body(security);
+        }
+        catch (ResourceNotFoundException E) {
+            log.error(MessageConstants.FETCH_SECURITY_FOR_TRADE_FAILED + E.getMessage());
             ErrorResponse errorResponse = ErrorResponse.builder().errorCode(HttpStatus.NOT_FOUND.value()).message(E.getMessage()).build();
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(errorResponse);
         }

@@ -2,6 +2,7 @@ package com.db.grad.javaapi.service;
 
 import com.db.grad.javaapi.constants.MessageConstants;
 import com.db.grad.javaapi.exception.ResourceNotFoundException;
+import com.db.grad.javaapi.model.security.Security;
 import com.db.grad.javaapi.model.trade.Trade;
 import com.db.grad.javaapi.repository.TradeRepository;
 import lombok.NonNull;
@@ -17,6 +18,11 @@ public class TradeService {
     public Trade getTradeById(@NonNull final Long tradeId) throws ResourceNotFoundException {
         Trade trade = tradeRepository.findById(tradeId).orElseThrow(() -> new ResourceNotFoundException(MessageConstants.NO_TRADE_FOUND_FOR_GIVEN_ID));
         return trade;
+    }
+
+    public Security getSecurityForTrade(@NonNull final Long tradeId) throws ResourceNotFoundException {
+        Trade trade = tradeRepository.findById(tradeId).orElseThrow(() -> new ResourceNotFoundException(MessageConstants.NO_TRADE_FOUND_FOR_GIVEN_ID));
+        return trade.getSecurity();
     }
 
     public void addTrade(@NonNull final Trade trade) {

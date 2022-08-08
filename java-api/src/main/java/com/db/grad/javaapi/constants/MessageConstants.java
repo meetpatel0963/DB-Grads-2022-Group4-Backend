@@ -11,6 +11,7 @@ public class MessageConstants {
     // Trades Messages
     public static final String NO_TRADE_FOUND_FOR_GIVEN_ID = "No Trade Found For Given Trade ID.";
     public static final String FETCH_TRADE_BY_ID_FAILED = "Fetch Trade By ID Failed. Reason: ";
+    public static final String FETCH_SECURITY_FOR_TRADE_FAILED = "Fetch Security For Trade Failed. Reason: ";
     public static final String UPDATE_TRADE_FAILED = "Update Trade Failed. Reason: ";
 
     // Auth Messages
