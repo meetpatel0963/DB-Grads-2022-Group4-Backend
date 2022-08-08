@@ -1,5 +1,6 @@
 package com.db.grad.javaapi.security;
 
+import com.db.grad.javaapi.model.user.Role;
 import com.db.grad.javaapi.model.user.User;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.security.core.GrantedAuthority;
@@ -35,12 +36,10 @@ public class UserPrincipal implements UserDetails {
     }
 
     public static UserPrincipal create(User user) {
-    	Set<String> roles = new TreeSet<String>();
-    	roles.add("ROLE_USER");
-//    	roles.add("ROLE_ADMIN");
+    	Set<Role> roles = user.getRoles();
     	
         List<GrantedAuthority> authorities = roles.stream().map(role ->
-                new SimpleGrantedAuthority(role)
+                new SimpleGrantedAuthority(role.getName())
         ).collect(Collectors.toList());
 
         return new UserPrincipal(

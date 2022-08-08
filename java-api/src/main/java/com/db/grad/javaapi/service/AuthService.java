@@ -1,6 +1,7 @@
 package com.db.grad.javaapi.service;
 
 import com.db.grad.javaapi.exception.BadRequestException;
+import com.db.grad.javaapi.model.user.Role;
 import com.db.grad.javaapi.model.user.User;
 import com.db.grad.javaapi.repository.UserRepository;
 import com.db.grad.javaapi.security.JwtTokenProvider;
@@ -14,6 +15,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
+import java.util.List;
+import java.util.Set;
 
 @Service
 public class AuthService {
@@ -32,7 +35,7 @@ public class AuthService {
 
     public String authenticateUser(@NonNull final String username, @NonNull final String password) throws BadRequestException {
         User user = userRepository.findByUsername(username)
-                .orElseThrow(() -> new BadRequestException("Invalid Username/Email or Password!"));
+                .orElseThrow(() -> new BadRequestException("Invalid Username or Password!"));
         Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
                         username,
@@ -47,9 +50,9 @@ public class AuthService {
 
     public User registerUser(@NonNull final String firstName, @NonNull final String lastName,
                              @NonNull final String username, @NonNull final String email,
-                             @NonNull final String role, @NonNull final String password) {
+                             @NonNull final Set<Role> roles, @NonNull final String password) {
         // Creating user's account
-        User user = new User(firstName + " " + lastName, username, email, password, role, new Date());
+        User user = new User(firstName + " " + lastName, username, email, password, roles, new Date());
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         return userRepository.saveAndFlush(user);
     }

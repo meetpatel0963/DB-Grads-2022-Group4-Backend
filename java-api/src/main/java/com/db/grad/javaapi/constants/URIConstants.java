@@ -13,8 +13,14 @@ public class URIConstants {
     public static final String ADD_TRADE = "/trades";
     public static final String UPDATE_TRADE = "/trades/{tradeId}";
 
-    // User URIs
+    // Auth URIs
     public static final String SIGN_UP = "/auth/signup";
     public static final String SIGN_IN = "/auth/signin";
+
+    // User URIs
+    public static final String GET_USER_BY_ID = "/users/{id}";
+    public static final String CHECK_USERNAME_AVAILABILITY = "/users/checkUsernameAvailability";
+    public static final String CHECK_EMAIL_AVAILABILITY = "/users/checkEmailAvailability";
+    public static final String GET_USER_PROFILE = "/users/username/{username}";
 
 }
