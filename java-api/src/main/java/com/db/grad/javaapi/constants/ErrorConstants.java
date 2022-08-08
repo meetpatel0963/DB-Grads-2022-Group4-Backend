@@ -8,4 +8,9 @@ public class ErrorConstants {
     public static final String FETCH_BOOKS_BY_USER_ID_FAILED = "Fetch Books By User ID Failed. Reason: ";
     public static final String FETCH_TRADES_BY_BOOK_ID_FAILED = "Fetch Trades By Book ID Failed. Reason: ";
 
+    // Trades Error Messages
+    public static final String NO_TRADE_FOUND_FOR_GIVEN_ID = "No Trade Found For Given Trade ID.";
+    public static final String FETCH_TRADE_BY_ID_FAILED = "Fetch Trade By ID Failed. Reason: ";
+    public static final String UPDATE_TRADE_FAILED = "Update Trade Failed. Reason: ";
+
 }
