@@ -22,7 +22,7 @@ public class BookService {
     public List<Book> getBooksByUserId(@NonNull final Long userId) throws ResourceNotFoundException {
         List<Book> books = bookRepository.getBooksByUserId(userId);
         if (books == null || books.isEmpty()) {
-            throw new ResourceNotFoundException(ErrorConstants.NO_BOOKS_FOR_GIVEN_USER_ID);
+            throw new ResourceNotFoundException(ErrorConstants.NO_BOOKS_FOUND_FOR_GIVEN_USER_ID);
         }
         return books;
     }
@@ -30,7 +30,7 @@ public class BookService {
     public List<Trade> getTradesByBookId(@NonNull final Long bookId) throws ResourceNotFoundException {
         Optional<Book> book = bookRepository.findById(bookId);
         if (!book.isPresent()) {
-            throw new ResourceNotFoundException(ErrorConstants.NO_BOOKS_FOR_GIVEN_USER_ID);
+            throw new ResourceNotFoundException(ErrorConstants.NO_TRADES_FOUND_FOR_GIVEN_BOOK_ID);
         }
         else {
             return new ArrayList<>(book.get().getTrades());
