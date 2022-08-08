@@ -1,5 +1,6 @@
 package com.db.grad.javaapi.service;
 
+import com.db.grad.javaapi.constants.MessageConstants;
 import com.db.grad.javaapi.exception.BadRequestException;
 import com.db.grad.javaapi.model.user.Role;
 import com.db.grad.javaapi.model.user.User;
@@ -15,7 +16,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
-import java.util.List;
 import java.util.Set;
 
 @Service
@@ -35,7 +35,7 @@ public class AuthService {
 
     public String authenticateUser(@NonNull final String username, @NonNull final String password) throws BadRequestException {
         User user = userRepository.findByUsername(username)
-                .orElseThrow(() -> new BadRequestException("Invalid Username or Password!"));
+                .orElseThrow(() -> new BadRequestException(MessageConstants.INVALID_USERNAME_OR_PASSWORD));
         Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
                         username,

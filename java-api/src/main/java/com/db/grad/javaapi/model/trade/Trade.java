@@ -1,6 +1,7 @@
 package com.db.grad.javaapi.model.trade;
 
 import com.db.grad.javaapi.model.book.Book;
+import com.db.grad.javaapi.model.security.Security;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -33,9 +34,6 @@ public class Trade {
     @Column(name = "counterparty_id")
     private Long counterPartyId;
 
-    @Column(name = "security_id")
-    private Long securityId;
-
     private Long quantity;
     private String status;
     private Double price;
@@ -53,5 +51,10 @@ public class Trade {
     @JoinColumn(name = "book_id")
     @JsonIgnore
     private Book book;
+
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "security_id")
+    @JsonIgnore
+    private Security security;
 
 }
