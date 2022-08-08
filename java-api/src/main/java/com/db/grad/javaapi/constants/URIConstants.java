@@ -10,6 +10,7 @@ public class URIConstants {
 
     // Trade URIs
     public static final String GET_TRADE_BY_ID = "/trades/{tradeId}";
+    public static final String GET_SECURITY_FOR_TRADE = "/trades/{tradeId}/security";
     public static final String ADD_TRADE = "/trades";
     public static final String UPDATE_TRADE = "/trades/{tradeId}";
 
