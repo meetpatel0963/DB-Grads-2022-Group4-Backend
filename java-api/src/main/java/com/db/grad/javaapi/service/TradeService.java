@@ -2,15 +2,12 @@ package com.db.grad.javaapi.service;
 
 import com.db.grad.javaapi.constants.ErrorConstants;
 import com.db.grad.javaapi.exception.ResourceNotFoundException;
-import com.db.grad.javaapi.model.book.Book;
 import com.db.grad.javaapi.model.trade.Trade;
 import com.db.grad.javaapi.repository.TradeRepository;
 import lombok.NonNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Optional;
 
 @Service

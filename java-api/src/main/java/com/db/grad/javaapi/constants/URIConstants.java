@@ -12,4 +12,9 @@ public class URIConstants {
     public static final String GET_TRADE_BY_ID = "/trades/{tradeId}";
     public static final String ADD_TRADE = "/trades";
     public static final String UPDATE_TRADE = "/trades/{tradeId}";
+
+    // User URIs
+    public static final String SIGN_UP = "/auth/signup";
+    public static final String SIGN_IN = "/auth/signin";
+
 }
