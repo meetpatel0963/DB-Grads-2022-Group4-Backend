@@ -32,5 +32,6 @@ public class URIConstants {
     public static final String GET_SECURITY_BY_USER_ID = "security/user/{userId}";
     public static final String GET_TRADES_BY_SECURITY_ID = "security/{securityId}/trades";
     public static final String GET_SECURITY_BY_DATERANGE = "/security/daterange/{date1}/{date2}";
+    public static final String GET_SECURITY_POST_MATURITY = "/security/postMaturity";
 
 }

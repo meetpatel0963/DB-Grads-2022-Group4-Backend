@@ -136,15 +136,23 @@ public class SecurityController {
     @GetMapping(URIConstants.GET_SECURITY_BY_DATERANGE)
     @PreAuthorize(MessageConstants.USER_ADMIN)
     public ResponseEntity<?> getSecurityByDateRange(@PathVariable(value = "date1") String date1, @PathVariable(value= "date2") String date2) {
+        log.info("Get Security By Date Range: From {} To {}", date1, date2);
+        List<Security> securityByDateRange = securityService.getSecurityByDateRange(date1, date2);
+        return ResponseEntity.ok().body(securityByDateRange);
+    }
+
+    @GetMapping(URIConstants.GET_SECURITY_POST_MATURITY)
+    @PreAuthorize(MessageConstants.USER_ADMIN)
+    public ResponseEntity<?> getSecuritiesPostMaturity() {
         try {
-            log.info("Get Security By Date Range: From {} To {}", date1, date2);
-            List<Security> securityByDateRange = securityService.getSecurityByDateRange(date1, date2);
-            return ResponseEntity.ok().body(securityByDateRange);
+            log.info("Fetch Securities Post Maturity");
+            List<Security> securities = securityService.getSecuritiesPostMaturity();
+            return ResponseEntity.ok().body(securities);
         }
-        catch(ResourceNotFoundException | ParseException E) {
-            log.error(MessageConstants.FETCH_SECURITY_BY_DATE_RANGE_FAILED + E.getMessage());
-            ErrorResponse errorResponse = ErrorResponse.builder().errorCode(HttpStatus.NOT_FOUND.value()).message(E.getMessage()).build();
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(errorResponse);
+        catch(ParseException E) {
+            log.error(MessageConstants.FETCH_SECURITY_POST_MATURITY_FAILED + E.getMessage());
+            ErrorResponse errorResponse = ErrorResponse.builder().errorCode(HttpStatus.INTERNAL_SERVER_ERROR.value()).message(E.getMessage()).build();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(errorResponse);
         }
     }
 

@@ -1,6 +1,7 @@
 package com.db.grad.javaapi.model.trade;
 
 import com.db.grad.javaapi.model.book.Book;
+import com.db.grad.javaapi.model.counterparty.CounterParty;
 import com.db.grad.javaapi.model.security.Security;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
@@ -12,6 +13,7 @@ import lombok.Setter;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -47,14 +49,19 @@ public class Trade {
     @Column(name = "settlement_date")
     private Date settlementDate;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "book_id")
     @JsonIgnore
     private Book book;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "security_id")
     @JsonIgnore
     private Security security;
+
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinColumn(name = "counter_party_id")
+    @JsonIgnore
+    private CounterParty counterParty;
 
 }

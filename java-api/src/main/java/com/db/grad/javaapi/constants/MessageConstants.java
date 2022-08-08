@@ -40,6 +40,7 @@ public class MessageConstants {
     public static final String FETCH_TRADES_FOR_SECURITY_ID_FAILED = "Fetch Trades For Security ID Failed. Reason: ";
     public static final String NO_TRADES_FOUND_FOR_GIVEN_SECURITY_ID = "No Trades Found For The Given Security ID.";
     public static final String FETCH_SECURITY_BY_DATE_RANGE_FAILED = "Fetch Security By Date Range Failed. Reason: ";
+    public static final String FETCH_SECURITY_POST_MATURITY_FAILED = "Fetch Security Post Maturity Failed. Reason: ";
 
 
 }

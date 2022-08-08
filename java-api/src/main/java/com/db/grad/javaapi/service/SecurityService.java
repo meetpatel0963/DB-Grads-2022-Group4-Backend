@@ -88,20 +88,15 @@ public class SecurityService {
 		return new ArrayList<>(security.getTrades());
 	}
 
-    public List < Security > getSecurityByDateRange(@NonNull final String from, @NonNull final String to)
-			throws ResourceNotFoundException, ParseException {
-		SimpleDateFormat sdformat = new SimpleDateFormat("yyyy-MM-dd");
-		Date d1 = sdformat.parse(from);
-		Date d2 = sdformat.parse(to);
+    public List<Security> getSecurityByDateRange(@NonNull final String from, @NonNull final String to) {
+		return securityRepository.getSecurityByDateRange(from, to);
+	}
 
-		List<Security> security = securityRepository.findAll();
-		List<Security> newSecurity = new ArrayList<Security>();
-		for (Security temp : security) {
-			Date d = sdformat.parse(temp.getMaturityDate());
-			if(d.compareTo(d1) >= 0 && d.compareTo(d2) <= 0) newSecurity.add(temp);
-		}
-
-		return newSecurity;
+	public List<Security> getSecuritiesPostMaturity() throws ParseException {
+		Date now = new Date();
+		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+		String dateString = simpleDateFormat.format(now);
+		return securityRepository.getSecuritiesPostMaturity(dateString);
 	}
 
 }
