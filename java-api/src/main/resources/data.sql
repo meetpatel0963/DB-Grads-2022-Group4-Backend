@@ -18,6 +18,9 @@ VALUES (1, 123456789, 123456, 1234, '2020-10-19', 10, 'Bond', 10000, 'completed'
 INSERT INTO Security (id, isin, cusip, issuer, maturity_date, coupon, type, face_value, status)
 VALUES (2, 987654321, 654321, 4321, '2023-10-19', 9, 'Bond', 12000, 'completed');
 
+INSERT INTO Counter_Party (id, name) VALUES (1, 'counter_party_1');
+INSERT INTO Counter_Party (id, name) VALUES (2, 'counter_party_2');
+
 INSERT INTO Trades (id, book_id, counterparty_id, security_id, quantity, status, price, buy_sell, trade_date, settlement_date)
 VALUES (1, 1, 1, 1, 100, 'COMPLETED', 80000, 'BUY', '2022-08-05', '2022-08-10');
 INSERT INTO Trades (id, book_id, counterparty_id, security_id, quantity, status, price, buy_sell, trade_date, settlement_date)
