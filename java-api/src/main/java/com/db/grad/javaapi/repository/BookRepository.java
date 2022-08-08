@@ -11,5 +11,5 @@ import java.util.List;
 public interface BookRepository extends JpaRepository<Book, Long> {
     @Query("SELECT b FROM Book b INNER JOIN b.users u WHERE u.id = :userId")
     List<Book> getBooksByUserId(Long userId);
-    
+
 }

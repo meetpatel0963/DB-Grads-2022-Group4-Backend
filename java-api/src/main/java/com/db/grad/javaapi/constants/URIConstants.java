@@ -6,5 +6,6 @@ public class URIConstants {
 
     // Books URIs
     public static final String GET_BOOKS_BY_USER_ID = "/books/{userId}";
+    public static final String GET_TRADES_BY_BOOK_ID = "/books/trades/{bookId}";
 
 }
