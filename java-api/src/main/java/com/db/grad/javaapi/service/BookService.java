@@ -11,7 +11,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class BookService {
@@ -28,13 +27,8 @@ public class BookService {
     }
 
     public List<Trade> getTradesByBookId(@NonNull final Long bookId) throws ResourceNotFoundException {
-        Optional<Book> book = bookRepository.findById(bookId);
-        if (!book.isPresent()) {
-            throw new ResourceNotFoundException(MessageConstants.NO_TRADES_FOUND_FOR_GIVEN_BOOK_ID);
-        }
-        else {
-            return new ArrayList<>(book.get().getTrades());
-        }
+        Book book = bookRepository.findById(bookId).orElseThrow(() -> new ResourceNotFoundException(MessageConstants.NO_TRADES_FOUND_FOR_GIVEN_BOOK_ID));
+        return new ArrayList<>(book.getTrades());
     }
 
 }

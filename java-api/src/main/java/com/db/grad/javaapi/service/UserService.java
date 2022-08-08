@@ -1,5 +1,6 @@
 package com.db.grad.javaapi.service;
 
+import com.db.grad.javaapi.constants.MessageConstants;
 import com.db.grad.javaapi.exception.ResourceNotFoundException;
 import com.db.grad.javaapi.model.payload.UserIdentityAvailability;
 import com.db.grad.javaapi.model.payload.UserProfile;
@@ -8,6 +9,7 @@ import com.db.grad.javaapi.model.user.User;
 import com.db.grad.javaapi.repository.UserRepository;
 import com.db.grad.javaapi.security.CurrentUser;
 import com.db.grad.javaapi.security.UserPrincipal;
+import org.h2.api.ErrorCode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -25,8 +27,7 @@ public class UserService {
     }
 
     public User getUserById(@PathVariable(value = "id") Long userId) throws ResourceNotFoundException {
-        return userRepository.findById(userId)
-                .orElseThrow(() -> new ResourceNotFoundException("No User Found With Given ID."));
+        return userRepository.findById(userId).orElseThrow(() -> new ResourceNotFoundException(MessageConstants.NO_USER_FOUND_FOR_GIVEN_USER_ID));
     }
 
     public UserIdentityAvailability checkUsernameAvailability(@RequestParam(value = "username") String username) {
@@ -40,8 +41,7 @@ public class UserService {
     }
 
     public UserProfile getUserProfile(@PathVariable(value = "username") String username) throws ResourceNotFoundException {
-        User user = userRepository.findByUsername(username)
-                .orElseThrow(() -> new ResourceNotFoundException("No User Found With Given Username."));
+        User user = userRepository.findByUsername(username).orElseThrow(() -> new ResourceNotFoundException(MessageConstants.NO_USER_FOUND_FOR_GIVEN_USERNAME));
 
         UserProfile userProfile = new UserProfile(user.getId(), user.getUsername(),
                 user.getEmail(), user.getCreationDate());
