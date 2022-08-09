@@ -63,9 +63,16 @@ public class TradeController {
     @PostMapping(URIConstants.ADD_TRADE)
     @PreAuthorize(MessageConstants.ADMIN)
     public ResponseEntity<?> addTrade(@Valid @RequestBody Trade trade) {
-        log.info("Add Trade Request For Trade: {}", trade);
-        tradeService.addTrade(trade);
-        return ResponseEntity.ok().body(trade);
+        try {
+            log.info("Add Trade Request For Trade: {}", trade.toString());
+            tradeService.addTrade(trade);
+            return ResponseEntity.ok().body(trade);
+        }
+        catch (ResourceNotFoundException E) {
+            log.error(MessageConstants.ADD_TRADE_FAILED + E.getMessage());
+            ErrorResponse errorResponse = ErrorResponse.builder().errorCode(HttpStatus.NOT_FOUND.value()).message(E.getMessage()).build();
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(errorResponse);
+        }
     }
 
     @PutMapping(URIConstants.UPDATE_TRADE)

@@ -67,7 +67,7 @@ public class SecurityController {
     @PostMapping(URIConstants.ADD_SECURITY)
     @PreAuthorize(MessageConstants.ADMIN)
     public ResponseEntity<?> addSecurity(@Valid @RequestBody Security security) {
-        log.info("Add Security Request For Security: {}", security);
+        log.info("Add Security Request For Security: {}", security.toString());
         securityService.addSecurity(security);
         return ResponseEntity.ok().body(security);
     }

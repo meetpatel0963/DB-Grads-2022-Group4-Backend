@@ -9,7 +9,6 @@ import com.db.grad.javaapi.model.user.User;
 import com.db.grad.javaapi.repository.UserRepository;
 import com.db.grad.javaapi.security.CurrentUser;
 import com.db.grad.javaapi.security.UserPrincipal;
-import org.h2.api.ErrorCode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PathVariable;

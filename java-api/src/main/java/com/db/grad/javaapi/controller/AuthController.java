@@ -10,6 +10,7 @@ import com.db.grad.javaapi.model.payload.SignUpRequest;
 import com.db.grad.javaapi.model.user.User;
 import com.db.grad.javaapi.repository.UserRepository;
 import com.db.grad.javaapi.service.AuthService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -23,6 +24,7 @@ import java.net.URI;
 
 @RestController
 @RequestMapping(URIConstants.API_V1)
+@Slf4j
 public class AuthController {
 
     @Autowired
@@ -33,12 +35,14 @@ public class AuthController {
 
     @PostMapping(URIConstants.SIGN_IN)
     public ResponseEntity<?> authenticateUser(@RequestBody LoginRequest loginRequest) throws BadRequestException {
+        log.info("Sign In Request: {}", loginRequest.toString());
         String jwt = authService.authenticateUser(loginRequest.getUsername(), loginRequest.getPassword());
         return ResponseEntity.ok(new JwtAuthenticationResponse(jwt));
     }
 
     @PostMapping(URIConstants.SIGN_UP)
     public ResponseEntity<?> registerUser(@RequestBody SignUpRequest signUpRequest) {
+        log.info("Sign Up Request: {}", signUpRequest.toString());
         if(userRepository.existsByUsername(signUpRequest.getUsername())) {
             return new ResponseEntity(new ApiResponse(false, MessageConstants.USERNAME_ALREADY_IN_USE),
                     HttpStatus.BAD_REQUEST);
